@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calendário Nexus</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📅 Calendário Nexus</h1>
+  </header>
+
+  <main>
+    <!-- Navegação do calendário -->
+    <div id="month-navigation">
+      <button id="prev-month">◀</button>
+      <h2 id="month-year"></h2>
+      <button id="next-month">▶</button>
+    </div>
+
+    <!-- Dias da semana -->
+    <div id="weekdays">
+      <div>Dom</div>
+      <div>Seg</div>
+      <div>Ter</div>
+      <div>Qua</div>
+      <div>Qui</div>
+      <div>Sex</div>
+      <div>Sáb</div>
+    </div>
+
+    <!-- Grade do calendário -->
+    <div id="calendar"></div>
+
+    <!-- Adicionar evento -->
+    <section id="event-section">
+      <h2>Adicionar Evento</h2>
+      <input type="date" id="event-date" />
+      <input type="text" id="event-title" placeholder="Título do evento" />
+      <button id="add-event">Adicionar</button>
+    </section>
+
+    <!-- Lista de eventos -->
+    <section id="event-list">
+      <h2>Eventos</h2>
+      <ul id="event-ul"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>Desenvolvido por Diego Henrique</p>
+  </footer>
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
