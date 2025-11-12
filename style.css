@@ -103,133 +103,17 @@ html,body{height:100%;background:#030305;color:#eee;font-family:'Poppins',sans-s
    📱 Ajustes avançados para mobile
    =============================== */
 @media (max-width: 768px) {
-  /* Reorganiza layout: agenda vai para baixo */
-  .content {
-    flex-direction: column;
-    align-items: center;
-    gap: 26px;
-  }
-
-  .calendar-panel,
-  .agenda-panel {
-    width: 100%;
-    max-width: 480px;
-  }
-
-  /* Centraliza título e botões */
-  .app-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 10px;
-  }
-
-  .controls {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .month-label {
-    font-size: 0.95rem;
-    min-width: 140px;
-  }
-
-  .accent-btn {
-    font-size: 0.9rem;
-    padding: 8px 10px;
-  }
-
-  /* Grade dos dias */
-  .weekdays div {
-    font-size: 0.8rem;
-  }
-
-  .calendar-grid {
-    gap: 6px;
-  }
-
-  .day {
-    min-height: 65px;
-    padding: 8px;
-    border-radius: 10px;
-  }
-
-  .day .day-num {
-    font-size: 0.9rem;
-  }
-
-  /* Agenda mais espaçada e agradável */
-  .agenda-panel {
-    padding: 14px;
-    background: rgba(20, 20, 20, 0.55);
-    box-shadow: 0 0 18px rgba(255, 0, 0, 0.1);
-    backdrop-filter: blur(12px);
-  }
-
-  .agenda-item {
-    padding: 10px 12px;
-    border-radius: 10px;
-    font-size: 0.9rem;
-  }
-
-  .agenda-item .meta {
-    font-size: 0.8rem;
-  }
-
-  /* Modal ocupa quase toda a tela */
-  .modal-card {
-    width: 92%;
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 16px;
-  }
-
-  /* Ajusta imagens flutuantes */
-  .floating-img {
-    width: 180px;
-    opacity: 0.5;
-    filter: blur(0.4px) brightness(0.9);
-  }
-
-  /* Melhor espaçamento geral */
-  .app {
-    padding: 90px 16px 24px 16px;
-    border-radius: 18px;
-    max-width: 95%;
-  }
-
-  /* Melhora toque e leitura */
-  button, input {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 420px) {
-  /* Otimização para telas muito pequenas */
-  .calendar-grid {
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-  }
-
-  .day {
-    min-height: 58px;
-    padding: 6px;
-  }
-
-  .agenda-item {
-    font-size: 0.82rem;
-  }
-
-  .agenda-item .meta {
-    font-size: 0.7rem;
-  }
-
-  .month-label {
-    font-size: 0.85rem;
-    min-width: 120px;
-  }
-
-  .accent-btn {
-    padding: 7px 9px;
-  }
+    .app{
+        width:100%;
+        margin:16px auto;
+        padding:16px;
+    }
+    .content{
+        flex-direction:column;
+    }
+    .agenda-panel{
+        width:100%;
+        margin-top:20px;
+    }
 }
 
