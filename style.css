@@ -192,7 +192,6 @@ html,body{height:100%;background:#030305;color:#eee;font-family:'Poppins',sans-s
 
   /* Melhor espaçamento geral */
   .app {
-    margin: 12px auto;
     padding: 16px;
     border-radius: 18px;
     max-width: 95%;
