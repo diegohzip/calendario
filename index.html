@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agenda do Casal 💕</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Nosso Calendário — Dark Glasmorphism</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="fundo">
-    <img src="imagens/1.jpg" class="flutuante" />
-    <img src="imagens/2.jpg" class="flutuante" />
-    <img src="imagens/3.jpg" class="flutuante" />
-    <img src="imagens/4.jpg" class="flutuante" />
-    <img src="imagens/5.jpg" class="flutuante" />
-    <img src="imagens/6.jpg" class="flutuante" />
+  <!-- fundo animado: imagens gerenciadas por script -->
+  <div id="floating-bg" aria-hidden="true"></div>
+
+  <!-- app -->
+  <div class="app">
+    <header class="app-header">
+      <div class="title">
+        <h1>💞 Nosso Calendário</h1>
+        <p class="subtitle">Fiz esse calendário especialmente para nós dois 💖</p>
+      </div>
+
+      <div class="controls">
+        <button id="prevMonth" class="circle-btn" title="Mês anterior">◀</button>
+        <div id="monthLabel" class="month-label">—</div>
+        <button id="nextMonth" class="circle-btn" title="Próximo mês">▶</button>
+        <button id="quickAdd" class="accent-btn" title="Adicionar evento">＋ Adicionar</button>
+      </div>
+    </header>
+
+    <main class="content">
+      <section class="calendar-panel">
+        <div class="weekdays">
+          <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+        </div>
+        <div id="calendarGrid" class="calendar-grid" aria-label="Calendário"></div>
+      </section>
+
+      <aside class="agenda-panel">
+        <h2>Agenda</h2>
+        <ul id="agendaList" class="agenda-list" aria-live="polite"></ul>
+      </aside>
+    </main>
   </div>
 
-  <div class="container">
-    <h1>🌹 Nossa agenda 🌹</h1>
-    <div class="calendar-container">
-      <div id="calendar"></div>
-      <div id="eventos">
-        <h2>Eventos do Dia</h2>
-        <ul id="lista-eventos"></ul>
-        <button id="btnAdd">➕ Adicionar Evento</button>
+  <!-- Modal -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header class="modal-header">
+        <h3 id="modalTitle">Eventos — <span id="modalDateLabel"></span></h3>
+        <button id="closeModal" class="icon-close" aria-label="Fechar">✕</button>
+      </header>
+
+      <div class="modal-body">
+        <ul id="eventsForDay" class="events-day"></ul>
+
+        <div class="add-row">
+          <input id="eventTitleInput" type="text" placeholder="Título do evento" />
+          <input id="eventDateInput" type="date" />
+          <button id="saveEventBtn" class="accent-btn">Salvar</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <h3>Adicionar Evento</h3>
-      <input type="text" id="eventoInput" placeholder="Descrição do evento" />
-      <button id="salvarEvento">Salvar</button>
-      <button id="cancelarEvento">Cancelar</button>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
