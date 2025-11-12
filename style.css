@@ -1,220 +1,198 @@
-/* ===== Estilo Glasmorphism - Tema Escuro ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background: radial-gradient(circle at top left, #0d1117, #010409);
-  color: #e2e2e2;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-/* ===== Cabeçalho ===== */
-header {
-  text-align: center;
-  padding: 25px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-header h1 {
-  color: #66b2ff;
-  font-size: 1.9rem;
-  letter-spacing: 1px;
-}
-
-/* ===== Estrutura principal ===== */
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-  padding: 40px 20px;
-}
-
-/* ===== Cartões do conteúdo ===== */
-#event-section,
-#event-list {
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 16px;
-  padding: 25px;
-  width: 100%;
-  max-width: 600px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  transition: transform 0.3s;
-}
-
-#event-section:hover,
-#event-list:hover {
-  transform: translateY(-3px);
-}
-
-/* ===== Inputs e Botões ===== */
-input,
-button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 8px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-}
-
-input {
-  background: rgba(255, 255, 255, 0.1);
-  color: #f0f0f0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-input::placeholder {
-  color: #aaa;
-}
-
-button {
-  background: linear-gradient(90deg, #007bff, #00aaff);
+  background: #0d0d0d;
   color: white;
-  cursor: pointer;
-  transition: 0.3s;
-  border: none;
-  font-weight: 600;
+  overflow-y: auto;
+  min-height: 80vh;
 }
 
-button:hover {
-  filter: brightness(1.2);
+.fundo img {
+  position: fixed;
+  width: 250px;
+  height: auto;
+  opacity: 0.25;
+  border-radius: 20px;
+  animation: flutuar 25s infinite ease-in-out;
 }
 
-/* ===== Calendário ===== */
+@keyframes flutuar {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translateY(-40px) rotate(10deg);
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.25;
+  }
+}
+
+.fundo img:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+.fundo img:nth-child(2) { top: 30%; left: 75%; animation-delay: 5s; }
+.fundo img:nth-child(3) { top: 70%; left: 10%; animation-delay: 10s; }
+.fundo img:nth-child(4) { top: 50%; left: 60%; animation-delay: 15s; }
+.fundo img:nth-child(5) { top: 80%; left: 40%; animation-delay: 20s; }
+.fundo img:nth-child(6) { top: 20%; left: 30%; animation-delay: 25s; }
+
+.container {
+  backdrop-filter: blur(15px) saturate(180%);
+  background-color: rgba(20, 20, 20, 0.6);
+  border-radius: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ff3b3b;
+}
+
+.calendar-container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 #calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
-  width: 100%;
-  max-width: 600px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 15px;
-  border-radius: 16px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+  width: 400px;
+  text-align: center;
 }
 
-.day {
-  background: rgba(255, 255, 255, 0.08);
+.dia {
+  padding: 15px;
   border-radius: 10px;
-  text-align: center;
-  padding: 15px 0;
+  background: rgba(255, 255, 255, 0.05);
   cursor: pointer;
   transition: 0.3s;
-  color: #f0f0f0;
 }
 
-.day:hover {
-  background: linear-gradient(135deg, #007bff, #00aaff);
-  color: white;
-  transform: scale(1.05);
+.dia:hover {
+  background: rgba(255, 0, 0, 0.3);
 }
 
-/* ===== Lista de eventos ===== */
-#event-ul {
+.ocupado {
+  background: rgba(255, 0, 0, 0.5);
+  color: #fff;
+  font-weight: bold;
+}
+
+.atual {
+  border: 2px solid #ff3b3b;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  animation: pulsar 2s infinite ease-in-out;
+}
+
+@keyframes pulsar {
+  0% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+  50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.8); }
+  100% { box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
+}
+
+
+#eventos {
+  width: 300px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+#lista-eventos {
   list-style: none;
   margin-top: 10px;
 }
 
-#event-ul li {
+#lista-eventos li {
+  background: rgba(255, 0, 0, 0.2);
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  padding: 12px 15px;
-  border-radius: 10px;
-  margin-top: 8px;
-  transition: 0.3s;
 }
 
-#event-ul li:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-#event-ul button {
-  background: #ff4747;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-}
-
-#event-ul button:hover {
-  background: #ff6363;
-}
-
-/* ===== Rodapé ===== */
-footer {
-  text-align: center;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-/* ===== Navegação de meses ===== */
-#month-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 12px;
-  padding: 10px 20px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-#month-navigation button {
-  background: rgba(255, 255, 255, 0.1);
-  color: #66b2ff;
-  font-size: 1.3rem;
+#lista-eventos button {
+  background: none;
   border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  color: #ff3b3b;
   cursor: pointer;
+  font-size: 18px;
+}
+
+#btnAdd {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  background: #ff3b3b;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
   transition: 0.3s;
 }
 
-#month-navigation button:hover {
-  background: #007bff;
-  color: white;
+#btnAdd:hover {
+  background: #ff1e1e;
 }
 
-#month-year {
-  color: #e2e2e2;
-  font-size: 1.4rem;
-  letter-spacing: 1px;
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  justify-content: center;
+  align-items: center;
 }
 
-/* ===== Dias da semana ===== */
-#weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+.modal-content {
+  background: rgba(20, 20, 20, 0.9);
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
   text-align: center;
-  font-weight: 600;
-  color: #66b2ff;
-  margin-bottom: 5px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.modal-content input {
   width: 100%;
-  max-width: 600px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.modal-content button {
+  background: #ff3b3b;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px;
+  transition: 0.3s;
+}
+
+.modal-content button:hover {
+  background: #ff1e1e;
 }

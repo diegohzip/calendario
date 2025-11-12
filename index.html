@@ -3,56 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calendário Nexus</title>
+  <title>Agenda do Casal 💕</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>📅 Calendário Nexus</h1>
-  </header>
+  <div class="fundo">
+    <img src="imagens/1.jpg" class="flutuante" />
+    <img src="imagens/2.jpg" class="flutuante" />
+    <img src="imagens/3.jpg" class="flutuante" />
+    <img src="imagens/4.jpg" class="flutuante" />
+    <img src="imagens/5.jpg" class="flutuante" />
+    <img src="imagens/6.jpg" class="flutuante" />
+  </div>
 
-  <main>
-    <!-- Navegação do calendário -->
-    <div id="month-navigation">
-      <button id="prev-month">◀</button>
-      <h2 id="month-year"></h2>
-      <button id="next-month">▶</button>
+  <div class="container">
+    <h1>🌹 Nossa agenda 🌹</h1>
+    <div class="calendar-container">
+      <div id="calendar"></div>
+      <div id="eventos">
+        <h2>Eventos do Dia</h2>
+        <ul id="lista-eventos"></ul>
+        <button id="btnAdd">➕ Adicionar Evento</button>
+      </div>
     </div>
+  </div>
 
-    <!-- Dias da semana -->
-    <div id="weekdays">
-      <div>Dom</div>
-      <div>Seg</div>
-      <div>Ter</div>
-      <div>Qua</div>
-      <div>Qui</div>
-      <div>Sex</div>
-      <div>Sáb</div>
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h3>Adicionar Evento</h3>
+      <input type="text" id="eventoInput" placeholder="Descrição do evento" />
+      <button id="salvarEvento">Salvar</button>
+      <button id="cancelarEvento">Cancelar</button>
     </div>
+  </div>
 
-    <!-- Grade do calendário -->
-    <div id="calendar"></div>
-
-    <!-- Adicionar evento -->
-    <section id="event-section">
-      <h2>Adicionar Evento</h2>
-      <input type="date" id="event-date" />
-      <input type="text" id="event-title" placeholder="Título do evento" />
-      <button id="add-event">Adicionar</button>
-    </section>
-
-    <!-- Lista de eventos -->
-    <section id="event-list">
-      <h2>Eventos</h2>
-      <ul id="event-ul"></ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>Desenvolvido por Diego Henrique</p>
-  </footer>
-
-  <script type="module" src="firebase.js"></script>
-  <script type="module" src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

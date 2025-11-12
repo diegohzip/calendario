@@ -1,120 +1,93 @@
-import { db, collection, addDoc, getDocs, deleteDoc, doc } from "./firebase.js";
+document.addEventListener("DOMContentLoaded", () => {
+  const calendar = document.getElementById("calendar");
+  const listaEventos = document.getElementById("lista-eventos");
+  const btnAdd = document.getElementById("btnAdd");
+  const modal = document.getElementById("modal");
+  const eventoInput = document.getElementById("eventoInput");
+  const salvarEvento = document.getElementById("salvarEvento");
+  const cancelarEvento = document.getElementById("cancelarEvento");
 
-const calendarDiv = document.getElementById("calendar");
-const eventDateInput = document.getElementById("event-date");
-const eventTitleInput = document.getElementById("event-title");
-const addEventBtn = document.getElementById("add-event");
-const eventUl = document.getElementById("event-ul");
-const eventsRef = collection(db, "eventos");
+  let eventos = JSON.parse(localStorage.getItem("eventos")) || {};
+  let dataSelecionada = null;
 
-const monthYearLabel = document.getElementById("month-year");
-const prevMonthBtn = document.getElementById("prev-month");
-const nextMonthBtn = document.getElementById("next-month");
+  // Cria o calendário fixo (mês atual)
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth();
+  const diasNoMes = new Date(ano, mes + 1, 0).getDate();
 
-let currentMonth = new Date().getMonth();
-let currentYear = new Date().getFullYear();
+  for (let i = 1; i <= diasNoMes; i++) {
+    const diaDiv = document.createElement("div");
+    diaDiv.classList.add("dia");
+    diaDiv.textContent = i;
+    const dataStr = `${ano}-${mes}-${i}`;
 
-// Nomes dos meses
-const meses = [
-  "Janeiro",
-  "Fevereiro",
-  "Março",
-  "Abril",
-  "Maio",
-  "Junho",
-  "Julho",
-  "Agosto",
-  "Setembro",
-  "Outubro",
-  "Novembro",
-  "Dezembro"
-];
+    if (eventos[dataStr]?.length) diaDiv.classList.add("ocupado");
+    if (i === hoje.getDate()) diaDiv.classList.add("atual");
 
-// Gera o calendário do mês atual
-function gerarCalendario(mes, ano) {
-  calendarDiv.innerHTML = "";
-  monthYearLabel.textContent = `${meses[mes]} ${ano}`;
 
-  const primeiroDia = new Date(ano, mes, 1).getDay();
-  const ultimoDia = new Date(ano, mes + 1, 0).getDate();
-
-  // Dias vazios antes do início do mês
-  for (let i = 0; i < primeiroDia; i++) {
-    const div = document.createElement("div");
-    calendarDiv.appendChild(div);
-  }
-
-  // Dias do mês
-  for (let dia = 1; dia <= ultimoDia; dia++) {
-    const div = document.createElement("div");
-    div.textContent = dia;
-    div.classList.add("day");
-
-    div.addEventListener("click", () => {
-      const dataFormatada = `${ano}-${String(mes + 1).padStart(2, "0")}-${String(dia).padStart(2, "0")}`;
-      eventDateInput.value = dataFormatada;
-      eventDateInput.scrollIntoView({ behavior: "smooth" });
+    diaDiv.addEventListener("click", () => {
+      dataSelecionada = dataStr;
+      mostrarEventos(dataSelecionada);
     });
 
-    calendarDiv.appendChild(div);
-  }
-}
-
-// Navegação entre meses
-prevMonthBtn.addEventListener("click", () => {
-  currentMonth--;
-  if (currentMonth < 0) {
-    currentMonth = 11;
-    currentYear--;
-  }
-  gerarCalendario(currentMonth, currentYear);
-});
-
-nextMonthBtn.addEventListener("click", () => {
-  currentMonth++;
-  if (currentMonth > 11) {
-    currentMonth = 0;
-    currentYear++;
-  }
-  gerarCalendario(currentMonth, currentYear);
-});
-
-// Adicionar evento
-addEventBtn.addEventListener("click", async () => {
-  const data = eventDateInput.value;
-  const titulo = eventTitleInput.value.trim();
-
-  if (!data || !titulo) {
-    alert("Preencha todos os campos!");
-    return;
+    calendar.appendChild(diaDiv);
   }
 
-  await addDoc(eventsRef, { data, titulo });
-  eventDateInput.value = "";
-  eventTitleInput.value = "";
-  carregarEventos();
-});
+  function mostrarEventos(data) {
+    listaEventos.innerHTML = "";
+    const evts = eventos[data] || [];
+    if (evts.length === 0) {
+      listaEventos.innerHTML = "<li>Nenhum evento neste dia.</li>";
+    } else {
+      evts.forEach((evt, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `${evt} <button data-index="${index}">✖</button>`;
+        li.querySelector("button").addEventListener("click", () => {
+          evts.splice(index, 1);
+          if (evts.length === 0) delete eventos[data];
+          localStorage.setItem("eventos", JSON.stringify(eventos));
+          atualizarCalendario();
+          mostrarEventos(data);
+        });
+        listaEventos.appendChild(li);
+      });
+    }
+  }
 
-// Listar eventos
-async function carregarEventos() {
-  eventUl.innerHTML = "";
-  const snapshot = await getDocs(eventsRef);
-  snapshot.forEach((docSnap) => {
-    const li = document.createElement("li");
-    li.textContent = `${docSnap.data().data} — ${docSnap.data().titulo}`;
+  function atualizarCalendario() {
+    [...calendar.children].forEach((dia) => {
+      const dataStr = `${ano}-${mes}-${dia.textContent}`;
+      if (eventos[dataStr]?.length) {
+        dia.classList.add("ocupado");
+      } else {
+        dia.classList.remove("ocupado");
+      }
+    });
+  }
 
-    const btn = document.createElement("button");
-    btn.textContent = "Excluir";
-    btn.onclick = async () => {
-      await deleteDoc(doc(db, "eventos", docSnap.id));
-      carregarEventos();
-    };
-
-    li.appendChild(btn);
-    eventUl.appendChild(li);
+  btnAdd.addEventListener("click", () => {
+    if (!dataSelecionada) {
+      alert("Selecione um dia no calendário!");
+      return;
+    }
+    modal.style.display = "flex";
   });
-}
 
-// Inicialização
-gerarCalendario(currentMonth, currentYear);
-carregarEventos();
+  salvarEvento.addEventListener("click", () => {
+    const texto = eventoInput.value.trim();
+    if (!texto) return alert("Digite algo!");
+
+    if (!eventos[dataSelecionada]) eventos[dataSelecionada] = [];
+    eventos[dataSelecionada].push(texto);
+    localStorage.setItem("eventos", JSON.stringify(eventos));
+    eventoInput.value = "";
+    modal.style.display = "none";
+    atualizarCalendario();
+    mostrarEventos(dataSelecionada);
+  });
+
+  cancelarEvento.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+});
