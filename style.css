@@ -104,7 +104,7 @@ html,body{height:100%;background:#030305;color:#eee;font-family:'Poppins',sans-s
    =============================== */
 @media (max-width: 768px) {
     .app{
-      width:calc(100% - 32px);
+      width:calc(100%);
       max-width:1100px;
       margin:12px auto;
       padding:14px;
