@@ -104,16 +104,86 @@ html,body{height:100%;background:#030305;color:#eee;font-family:'Poppins',sans-s
    =============================== */
 @media (max-width: 768px) {
     .app{
-        width:100%;
-        margin:16px auto;
-        padding:16px;
+      width:calc(100% - 32px);
+      max-width:1100px;
+      margin:12px auto;
+      padding:14px;
+      border-radius:12px;
     }
+    .app-header{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:8px;
+    }
+    .title h1{font-size:1.15rem}
+    .subtitle{font-size:0.75rem}
+    .controls{
+      width:100%;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .circle-btn{width:40px;height:36px}
+    .month-label{
+      min-width:0;
+      width:100%;
+      max-width:260px;
+      padding:8px;
+      margin-inline:auto;
+      text-align:center;
+    }
+
     .content{
-        flex-direction:column;
+      flex-direction:column;
+      gap:14px;
     }
+    .calendar-panel{
+      width:100%;
+      padding:8px;
+    }
+
+    .weekdays{gap:6px;margin-bottom:6px}
+    .weekdays div{font-size:0.82rem}
+    .calendar-grid{
+      gap:6px;
+      grid-auto-rows: minmax(64px, auto);
+    }
+
+    .day{
+      min-height:64px;
+      padding:8px;
+      border-radius:10px;
+    }
+    .day .day-num{font-size:0.9rem}
+    .day:hover{transform:none;box-shadow:0 8px 20px rgba(0,0,0,0.45)}
+
+    .dots{right:6px;bottom:6px;gap:6px}
+
+    .floating-img{
+      width:220px;
+      opacity:0.06;
+      will-change:transform,opacity;
+    }
+
     .agenda-panel{
-        width:100%;
-        margin-top:20px;
+      width:100%;
+      margin-top:12px;
+      padding:10px;
+      order:2;
     }
+    .agenda-list{max-height:360px}
+
+    .modal-card{
+      width:92%;
+      max-width:420px;
+      padding:12px;
+    }
+
+    .accent-btn{padding:8px 10px}
+    .add-row input[type="text"], .add-row input[type="date"]{font-size:0.95rem}
+    .events-day, .agenda-list{ -webkit-overflow-scrolling: touch }
+
+    /* pequenas telas extra: ajustes de espaçamento e tamanhos */
+    :root{ --day-min-height:64px }
 }
 
